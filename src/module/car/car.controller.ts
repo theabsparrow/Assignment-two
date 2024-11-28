@@ -66,7 +66,7 @@ const updateCar = async (req: Request, res: Response) => {
     const data = req.body;
 
     const result = await carService.updateCar(payload, data);
-    res.json({
+    res.status(200).json({
       message: 'Car updated successfully',
       success: true,
       data: result,
@@ -80,9 +80,29 @@ const updateCar = async (req: Request, res: Response) => {
   }
 };
 
+// delete a car data
+const deleteCar = async (req: Request, res: Response) => {
+  try {
+    const carId = req.params.id;
+    const result = carService.deleteCar(carId);
+    res.status(200).json({
+      message: 'Car deleted successfully',
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      message: 'something went wrong',
+      error: error,
+    });
+  }
+};
+
 export const carController = {
   createCar,
   getAllCars,
   getSingleCar,
   updateCar,
+  deleteCar,
 };

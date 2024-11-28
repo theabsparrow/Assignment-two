@@ -28,10 +28,15 @@ const updateCar = async (id: string, data: Tcar) => {
 };
 
 // delete a car
+const deleteCar = async (id: string) => {
+  const result = await CarModel.findByIdAndDelete(id);
+  return result;
+};
 
 export const carService = {
   createCar,
   getAllCars,
   getSingleCar,
   updateCar,
+  deleteCar,
 };
