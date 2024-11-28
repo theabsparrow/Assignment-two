@@ -7,16 +7,16 @@ const createCar = async (req: Request, res: Response) => {
     const payloade = req.body;
     const result = await carService.createCar(payloade);
 
-    res.json({
-      message: 'Car created successfully',
+    res.status(200).json({
       success: true,
+      message: 'Car created successfully',
       data: result,
     });
-  } catch (error) {
-    res.json({
+  } catch (err) {
+    res.status(500).json({
       status: false,
       message: 'something went wrong',
-      error,
+      error: err,
     });
   }
 };
@@ -59,8 +59,30 @@ const getSingleCar = async (req: Request, res: Response) => {
   }
 };
 
+// update a car
+const updateCar = async (req: Request, res: Response) => {
+  try {
+    const payload = req.params.id;
+    const data = req.body;
+
+    const result = await carService.updateCar(payload, data);
+    res.json({
+      message: 'Car updated successfully',
+      success: true,
+      data: result,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: false,
+      message: 'something went wrong',
+      error: err,
+    });
+  }
+};
+
 export const carController = {
   createCar,
   getAllCars,
   getSingleCar,
+  updateCar,
 };
