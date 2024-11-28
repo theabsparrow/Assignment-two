@@ -1,13 +1,16 @@
-import express, { Request, Response } from 'express'
-import cors from 'cors'
+import express, { Request, Response } from 'express';
+import cors from 'cors';
+import carRouter from './module/car/car.router';
 
 const app = express();
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
-app.get('/', (req:Request, res:Response) => {
-  res.send('server is running')
-})
+app.use('/api', carRouter);
 
-export default app
+app.get('/', (req: Request, res: Response) => {
+  res.send('car project is running');
+});
+
+export default app;
