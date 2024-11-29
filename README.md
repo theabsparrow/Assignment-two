@@ -111,8 +111,8 @@ This is an advance backend application with rest apis built with the powerfull t
 
    ```env
    NODE_ENV=development
-   MONGO_URI=your_mongodb_connection_string
    PORT=5000
+   DATABASE_URL=your_mongodb_connection_string
    ```
 
 4. **Run the Server:**
