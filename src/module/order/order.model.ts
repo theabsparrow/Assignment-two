@@ -32,5 +32,15 @@ const orderSchema = new Schema<Torder>({
   },
 });
 
+orderSchema.pre('save', function (this, next) {
+  const now = new Date();
+  const localTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+  if (!this.createdAt) {
+    this.createdAt = localTime;
+  }
+  this.updatedAt = localTime;
+  next();
+});
+
 const OrderModel = model<Torder>('Order', orderSchema);
 export default OrderModel;

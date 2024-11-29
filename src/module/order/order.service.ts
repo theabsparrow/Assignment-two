@@ -6,7 +6,6 @@ const createOrder = async (payload: Torder) => {
   const { car, quantity } = payload;
 
   const carData = await CarModel.findById(car);
-  console.log(carData);
 
   //   check if the car is not available
   if (!carData) {
