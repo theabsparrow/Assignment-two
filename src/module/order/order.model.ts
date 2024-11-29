@@ -14,6 +14,10 @@ const orderSchema = new Schema<Torder>({
     unique: true,
     trim: true,
   },
+  car: {
+    type: String,
+    required: [true, 'Car Id is required'],
+  },
   quantity: {
     type: Number,
     required: [true, 'quantity is required'],

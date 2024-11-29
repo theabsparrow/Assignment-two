@@ -2,9 +2,9 @@ import CarModel from '../car/car.model';
 import { Torder } from './order.interface';
 import OrderModel from './order.model';
 
+// create an order service
 const createOrder = async (payload: Torder) => {
   const { car, quantity } = payload;
-
   const carData = await CarModel.findById(car);
 
   //   check if the car is not available
@@ -19,7 +19,8 @@ const createOrder = async (payload: Torder) => {
 
   //   create the order
   const totalPrice = carData.price * quantity;
-  const orderCreation = await OrderModel.create({ ...payload, totalPrice });
+  payload.totalPrice = totalPrice;
+  const orderCreation = await OrderModel.create(payload);
 
   //   update the quantity and inStock from he Cars collection
   if (orderCreation) {
@@ -33,6 +34,17 @@ const createOrder = async (payload: Torder) => {
   return orderCreation;
 };
 
+// create the total reveneu service
+const totalReveneu = async () => {
+  const calculateReveneu = await OrderModel.aggregate([
+    { $group: { _id: null, totalreveneu: { $sum: '$totalPrice' } } },
+  ]);
+
+  const result = calculateReveneu[0].totalreveneu;
+  return result;
+};
+
 export const orderService = {
   createOrder,
+  totalReveneu,
 };
