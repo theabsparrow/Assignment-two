@@ -4,7 +4,7 @@ This is an advance backend application with rest apis built with the powerfull t
 
 ---
 
-## **Live Demo** : https://car-store-psi-wheat.vercel.app/
+## **Live Demo** : https://car-store-psi-wheat.vercel.app
 
 - **API Base URL:** : /api/cars
 
