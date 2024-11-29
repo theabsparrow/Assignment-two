@@ -12,3 +12,5 @@ export type Tcar = {
   createdAt?: Date;
   updatedAt?: Date;
 };
+
+export type Tquery = { searchTerm?: string };
