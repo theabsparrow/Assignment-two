@@ -68,7 +68,7 @@ const carSchema = new Schema<Tcar>({
   },
 });
 
-carSchema.pre('save', function (next) {
+carSchema.pre('save', function (this, next) {
   const now = new Date();
   const localTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
   if (!this.createdAt) {
@@ -78,7 +78,7 @@ carSchema.pre('save', function (next) {
   next();
 });
 
-carSchema.pre('findOneAndUpdate', function (next) {
+carSchema.pre('findOneAndUpdate', function (this, next) {
   const now = new Date();
   const localTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
 
